@@ -14,6 +14,12 @@ public:
 
     virtual void insert(T data) = 0;
     virtual void remove(const T& data) = 0;
+    virtual T removeMin() = 0;
+    virtual T removeMax() = 0;
+
+    size_t nodesCount() const {return m_nodesCount;};
+    size_t elementsCount() const {return m_elementsCount;};
+
 
     virtual bool search(const T& data) const {
         return searchRecursive(m_root, data);
@@ -28,6 +34,9 @@ protected:
 
     std::unique_ptr<TreeNode<T>> m_root;
     Comparator m_comparator;
+
+    size_t m_nodesCount{0};
+    size_t m_elementsCount{0};
 };
 
 template <typename T, typename Comparator>

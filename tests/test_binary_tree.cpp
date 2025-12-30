@@ -23,4 +23,53 @@ TEST(BinaryTreeTest, BasicInsertion) {
     EXPECT_EQ(tree.getRoot()->getRight()->getRight(), nullptr);
 }
 
+TEST(BinaryTreeTest, DecrementCountTest) {
+    BinaryTree<int> tree;
+    tree.insert(50);
+    tree.insert(50); 
+
+    tree.remove(50); 
+    ASSERT_NE(tree.getRoot(), nullptr);
+    EXPECT_EQ(tree.getRoot()->getCount(), 1);
+
+    tree.remove(50);
+    EXPECT_EQ(tree.getRoot(), nullptr);
+}
+
+TEST(BinaryTreeTest, MetricsReflectReality) {
+    BinaryTree<int> tree;
+    tree.insert(50);
+    tree.insert(50);
+    tree.insert(30);
+    tree.insert(70);
+
+    EXPECT_EQ(tree.nodesCount(), 3);
+    EXPECT_EQ(tree.elementsCount(), 4);
+
+    tree.remove(50);
+    EXPECT_EQ(tree.nodesCount(), 3);
+    EXPECT_EQ(tree.elementsCount(), 3);
+
+    tree.remove(50);
+    EXPECT_EQ(tree.nodesCount(), 2);
+    EXPECT_EQ(tree.elementsCount(), 2);
+}
+
+TEST(BinaryTreeTest, RemoveMinWithMultipleCounts) {
+    BinaryTree<int> tree;
+    tree.insert(10);
+    tree.insert(10);
+    tree.insert(20);
+
+    EXPECT_EQ(tree.removeMin(), 10);
+    ASSERT_NE(tree.getRoot(), nullptr);
+    EXPECT_EQ(tree.getRoot()->getCount(), 1);
+
+
+    EXPECT_EQ(tree.removeMin(), 10);
+    EXPECT_EQ(tree.getRoot()->getData(), 20);
+    EXPECT_EQ(tree.getRoot()->getLeft(), nullptr);
+    EXPECT_EQ(tree.getRoot()->getRight(), nullptr);
+}
+
 
