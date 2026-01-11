@@ -1,18 +1,18 @@
 #pragma once
 
-#include "TreeNode.hpp"
+#include "BinaryTreeNode.hpp"
 #include <functional>
 #include <memory>
 
 namespace adsc {
 
 template <typename T, typename Comparator = std::less<T>>
-class SortingTree {
+class BinarySortingTree {
 public:
 
-    explicit SortingTree(Comparator comp = Comparator());
+    explicit BinarySortingTree(Comparator comp = Comparator());
 
-    virtual ~SortingTree() = default;
+    virtual ~BinarySortingTree() = default;
 
     virtual void insert(T data) = 0;
     virtual void remove(const T& data) = 0;
@@ -29,12 +29,12 @@ public:
 
     bool empty() const;
 
-    const std::unique_ptr<TreeNode<T>>& getRoot() const;
+    const std::unique_ptr<BinaryTreeNode<T>>& getRoot() const;
 
 protected:
-    bool searchRecursive(const std::unique_ptr<TreeNode<T>>& node, const T& data) const;
+    bool searchRecursive(const std::unique_ptr<BinaryTreeNode<T>>& node, const T& data) const;
 
-    std::unique_ptr<TreeNode<T>> m_root;
+    std::unique_ptr<BinaryTreeNode<T>> m_root;
     Comparator m_comparator;
 
     size_t m_nodesCount{0};
@@ -42,22 +42,22 @@ protected:
 };
 
 template <typename T, typename Comparator>
-SortingTree<T, Comparator>::SortingTree(Comparator comp)
+BinarySortingTree<T, Comparator>::BinarySortingTree(Comparator comp)
     : m_root(nullptr), m_comparator(std::move(comp)) {}
 
 
 template <typename T, typename Comparator>
-bool SortingTree<T, Comparator>::empty() const {
+bool BinarySortingTree<T, Comparator>::empty() const {
     return m_root == nullptr;
 }
     
 template <typename T, typename Comparator>
-const std::unique_ptr<TreeNode<T>>& SortingTree<T, Comparator>::getRoot() const {
+const std::unique_ptr<BinaryTreeNode<T>>& BinarySortingTree<T, Comparator>::getRoot() const {
     return m_root;
 }
 
 template <typename T, typename Comparator>
-bool SortingTree<T, Comparator>::searchRecursive(const std::unique_ptr<TreeNode<T>>& node, const T& data) const {
+bool BinarySortingTree<T, Comparator>::searchRecursive(const std::unique_ptr<BinaryTreeNode<T>>& node, const T& data) const {
     if (!node) return false;
 
     if (m_comparator(data, node->getData())) {

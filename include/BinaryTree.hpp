@@ -1,11 +1,11 @@
 #pragma once
 
-#include "SortingTree.hpp"
+#include "BinarySortingTree.hpp"
 
 namespace adsc {
 
 template <typename T, typename Comparator = std::less<T>>
-class BinaryTree : public SortingTree<T, Comparator> {
+class BinaryTree : public BinarySortingTree<T, Comparator> {
 public:
     BinaryTree(Comparator comparator = Comparator());
 
@@ -17,10 +17,10 @@ public:
     virtual T removeMax() override;
 
 protected:
-    using SortingTree<T, Comparator>::m_root;
-    using SortingTree<T, Comparator>::m_comparator;
+    using BinarySortingTree<T, Comparator>::m_root;
+    using BinarySortingTree<T, Comparator>::m_comparator;
 
-    using TreeNodePtr = std::unique_ptr<TreeNode<T>>;
+    using TreeNodePtr = std::unique_ptr<BinaryTreeNode<T>>;
 
 private:
     // Helper for insert
@@ -39,7 +39,7 @@ private:
 
 template <typename T, typename Comparator>
 BinaryTree<T, Comparator>::BinaryTree(Comparator comparator)
-: SortingTree<T, Comparator>(comparator)
+: BinarySortingTree<T, Comparator>(comparator)
 {}
 
 template <typename T, typename Comparator>
@@ -52,7 +52,7 @@ template <typename T, typename Comparator>
 void BinaryTree<T, Comparator>::recursive_insert(TreeNodePtr& node, T data) {
     if (!node) {
         this->m_nodesCount++;
-        node = std::make_unique<TreeNode<T>>(std::move(data));
+        node = std::make_unique<BinaryTreeNode<T>>(std::move(data));
         return;
     }
 

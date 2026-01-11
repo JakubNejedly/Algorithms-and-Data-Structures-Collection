@@ -5,7 +5,7 @@
 namespace adsc {
 
 template <typename T, typename Comparator = std::less<T>>
-class AVLTree : public BinaryTree<T, Comparator> {
+class AVLTree : public BinarySortingTree<T, Comparator> {
 public:
     AVLTree(Comparator comparator = Comparator());
     ~AVLTree() = default;
@@ -16,9 +16,9 @@ public:
     T removeMax() override;
 
 private:
-    using SortingTree<T, Comparator>::m_root;
+    using BinarySortingTree<T, Comparator>::m_root;
     
-    using TreeNodePtr = typename BinaryTree<T, Comparator>::TreeNodePtr;
+    using TreeNodePtr = std::unique_ptr<BinaryTreeNode<T>>;
 
     // Helper for insert
     void recursive_insert(TreeNodePtr& node, T data);
@@ -42,7 +42,7 @@ private:
 
 template <typename T, typename Comparator>
 AVLTree<T, Comparator>::AVLTree(Comparator comparator)
-: BinaryTree<T, Comparator>(comparator)
+: BinarySortingTree<T, Comparator>(comparator)
 {}  
 
 template <typename T, typename Comparator>
@@ -55,7 +55,7 @@ template <typename T, typename Comparator>
 void AVLTree<T, Comparator>::recursive_insert(TreeNodePtr& node, T data) {
     if (!node) {
         this->m_nodesCount++;
-        node = std::make_unique<TreeNode<T>>(std::move(data));
+        node = std::make_unique<BinaryTreeNode<T>>(std::move(data));
         return;
     }
 

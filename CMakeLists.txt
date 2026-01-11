@@ -8,7 +8,7 @@ add_executable(benchmark src/benchmark.cpp)
 
 add_subdirectory(lib/googletest)
 add_executable(run_tests 
-    tests/test_tree_node.cpp
+    tests/test_binary_tree_node.cpp
     tests/test_binary_tree.cpp
     tests/test_avl_tree.cpp
 )

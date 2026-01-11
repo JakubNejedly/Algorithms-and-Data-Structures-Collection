@@ -7,17 +7,17 @@
 namespace adsc {
 
 template <typename T>
-class TreeNode {
+class BinaryTreeNode {
 public:
-    TreeNode(T data);
+    BinaryTreeNode(T data);
  
     const T& getData() const { return m_data; };
 
-    void setLeft(std::unique_ptr<TreeNode<T>> left) { m_left = std::move(left); };
-    std::unique_ptr<TreeNode<T>>& getLeft() {return m_left; };
+    void setLeft(std::unique_ptr<BinaryTreeNode<T>> left) { m_left = std::move(left); };
+    std::unique_ptr<BinaryTreeNode<T>>& getLeft() {return m_left; };
 
-    void setRight(std::unique_ptr<TreeNode<T>> right) { m_right = std::move(right); };
-    std::unique_ptr<TreeNode<T>>& getRight() {return m_right; };
+    void setRight(std::unique_ptr<BinaryTreeNode<T>> right) { m_right = std::move(right); };
+    std::unique_ptr<BinaryTreeNode<T>>& getRight() {return m_right; };
 
     void incrementCount() { m_count++; }    
     bool decrementCount();
@@ -37,12 +37,12 @@ protected:
 
     uint32_t m_height;
 
-    std::unique_ptr<TreeNode<T>> m_left;
-    std::unique_ptr<TreeNode<T>> m_right;
+    std::unique_ptr<BinaryTreeNode<T>> m_left;
+    std::unique_ptr<BinaryTreeNode<T>> m_right;
 };
 
 template <typename T>
-TreeNode<T>::TreeNode(T data)
+BinaryTreeNode<T>::BinaryTreeNode(T data)
 : m_data(std::move(data))
 , m_count(1)
 , m_height(1)
@@ -52,7 +52,7 @@ TreeNode<T>::TreeNode(T data)
 
 
 template <typename T>
-bool TreeNode<T>::decrementCount() {
+bool BinaryTreeNode<T>::decrementCount() {
     if (m_count > 0) {
         m_count--;
     }
@@ -60,14 +60,14 @@ bool TreeNode<T>::decrementCount() {
 }
 
 template <typename T>
-void TreeNode<T>::updateHeight() {
+void BinaryTreeNode<T>::updateHeight() {
     uint32_t leftHeight = m_left ? m_left->getHeight() : 0;
     uint32_t rightHeight = m_right ? m_right->getHeight() : 0;
     m_height = 1 + std::max(leftHeight, rightHeight);
 }
 
 template <typename T>
-int32_t TreeNode<T>::getNodeBalance() const {
+int32_t BinaryTreeNode<T>::getNodeBalance() const {
     int32_t leftH = m_left ? m_left->getHeight() : 0;
     int32_t rightH = m_right ? m_right->getHeight() : 0;
     return leftH - rightH;
