@@ -39,8 +39,12 @@ The following measurements compare the standard `BinaryTree` against the `AVLTre
 ## Build Requirements
 * C++17 compliant compiler
 * CMake 3.14+
+* Git
 
-### Building the project
+### init submodules
+git submodule update --init --recursive
+
+### Standard build process
 ```bash
 mkdir build && cd build
 cmake ..
