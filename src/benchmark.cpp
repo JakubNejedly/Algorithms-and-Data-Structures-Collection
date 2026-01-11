@@ -6,7 +6,9 @@
 #include <algorithm>
 #include <random>
 #include <iomanip>
+
 #include "BinaryTree.hpp"
+#include "AVLTree.hpp"
 
 /**
  * Benchmark to compare custom BinaryTree against std::multiset.

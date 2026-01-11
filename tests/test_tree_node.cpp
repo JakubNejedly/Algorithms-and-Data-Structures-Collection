@@ -8,24 +8,23 @@ TEST_F(TreeNodeTest, NodeInitialization) {
     EXPECT_EQ(node.getData(), 100);
 }
 
-TEST_F(TreeNodeTest, DepthCalculationWithChildren) {
-    auto root = std::make_unique<TreeNode<int32_t>>(10);
-    EXPECT_EQ(root->calculateDepth(), 1);
-
-    root->setLeft(std::make_unique<TreeNode<int32_t>>(5));
-    EXPECT_EQ(root->calculateDepth(), 2);
-    root->setRight(std::make_unique<TreeNode<int32_t>>(15));
-    EXPECT_EQ(root->calculateDepth(), 2);
+TEST_F(TreeNodeTest, InitialHeight) {
+    auto node = std::make_unique<TreeNode<int>>(10);
+    EXPECT_EQ(node->getHeight(), 1);
 }
 
-TEST_F(TreeNodeTest, DepthCalculationMultipleLevels) {
-    auto root = std::make_unique<TreeNode<int32_t>>(10);
-    root->setLeft(std::make_unique<TreeNode<int32_t>>(5));
-    root->getLeft()->setLeft(std::make_unique<TreeNode<int32_t>>(2));
-    EXPECT_EQ(root->calculateDepth(), 3);
+TEST_F(TreeNodeTest, UpdateHeightWithChildren) {
+    auto root = std::make_unique<TreeNode<int>>(10);
+    
+    root->setLeft(std::make_unique<TreeNode<int>>(5));
+    root->updateHeight();
+    EXPECT_EQ(root->getHeight(), 2);
 
-    root->setRight(std::make_unique<TreeNode<int32_t>>(15));
-    root->getRight()->setRight(std::make_unique<TreeNode<int32_t>>(20));
-    root->getRight()->getRight()->setRight(std::make_unique<TreeNode<int32_t>>(25));
-    EXPECT_EQ(root->calculateDepth(), 4);
+    root->setRight(std::make_unique<TreeNode<int>>(15));
+    root->updateHeight();
+    EXPECT_EQ(root->getHeight(), 2);
+
+    root->getLeft()->setHeight(3); 
+    root->updateHeight();
+    EXPECT_EQ(root->getHeight(), 4);
 }

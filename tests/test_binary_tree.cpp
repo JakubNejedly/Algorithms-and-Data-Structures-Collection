@@ -221,3 +221,56 @@ TEST(BinaryTreeGenericTest, StringEqualityWithComparator) {
     EXPECT_EQ(tree.nodesCount(), 3);
     EXPECT_EQ(tree.elementsCount(), 4);
 }
+
+TEST_F(BinaryTreeTest, BasicInsertionWithHeight) {
+    tree.insert(10);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 1);
+    tree.insert(5);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 2);
+    tree.insert(15);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 2);
+    EXPECT_EQ(tree.getRoot()->getLeft()->getHeight(), 1);
+}
+
+TEST_F(BinaryTreeTest, HeightOfSkewedTree) {
+    fillSkewed();
+    EXPECT_EQ(tree.getRoot()->getHeight(), 5);
+    
+    tree.remove(10);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 4);
+}
+
+TEST_F(BinaryTreeTest, HeightAfterRemovingNodeWithTwoChildren) {
+    fillStandard(); 
+    EXPECT_EQ(tree.getRoot()->getHeight(), 3);
+    tree.remove(25);
+    ASSERT_NE(tree.getRoot()->getLeft(), nullptr);
+    EXPECT_EQ(tree.getRoot()->getLeft()->getData(), 30);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 3);
+    EXPECT_EQ(tree.getRoot()->getLeft()->getHeight(), 2);
+}
+
+TEST_F(BinaryTreeTest, HeightAfterRemovingRootWithOneChild) {
+    tree.insert(50);
+    tree.insert(70);
+    tree.insert(90);
+    
+    EXPECT_EQ(tree.getRoot()->getHeight(), 3);
+    
+    tree.remove(50);
+    ASSERT_NE(tree.getRoot(), nullptr);
+    EXPECT_EQ(tree.getRoot()->getData(), 70);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 2);
+}
+
+TEST_F(BinaryTreeTest, DeepTreeHeightRecalculation) {
+    for (int x : {100, 50, 150, 25, 75, 125, 175, 10, 30}) tree.insert(x);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 4);
+
+    tree.remove(25);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 4);
+    
+    tree.remove(10);
+    tree.remove(30);
+    EXPECT_EQ(tree.getRoot()->getHeight(), 3);
+}
