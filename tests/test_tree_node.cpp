@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "TreeNode.hpp"
 
+using adsc::TreeNode;
+
 class TreeNodeTest : public ::testing::Test {};
 
 TEST_F(TreeNodeTest, NodeInitialization) {

@@ -2,6 +2,8 @@
 
 #include "SortingTree.hpp"
 
+namespace adsc {
+
 template <typename T, typename Comparator = std::less<T>>
 class BinaryTree : public SortingTree<T, Comparator> {
 public:
@@ -186,3 +188,5 @@ T BinaryTree<T, Comparator>::recursive_remove_max(TreeNodePtr& node) {
     node = std::move(node->getLeft());  
     return std::move(outData);
 }
+
+} // namespace adsc

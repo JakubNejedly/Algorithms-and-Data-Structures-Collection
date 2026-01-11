@@ -4,6 +4,8 @@
 #include <functional>
 #include <memory>
 
+namespace adsc {
+
 template <typename T, typename Comparator = std::less<T>>
 class SortingTree {
 public:
@@ -65,3 +67,5 @@ bool SortingTree<T, Comparator>::searchRecursive(const std::unique_ptr<TreeNode<
     }
     return true; // Found the element
 }
+
+} // namespace adsc

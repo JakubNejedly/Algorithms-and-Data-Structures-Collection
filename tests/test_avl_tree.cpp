@@ -4,6 +4,8 @@
 #include <queue>
 #include <vector>
 
+using adsc::AVLTree;
+
 class AVLTreeTest : public ::testing::Test {
 protected:
     AVLTree<int> avl;

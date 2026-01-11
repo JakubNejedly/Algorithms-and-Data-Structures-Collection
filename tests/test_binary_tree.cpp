@@ -4,6 +4,8 @@
 
 #include "BinaryTree.hpp"
 
+using adsc::BinaryTree;
+
 class BinaryTreeTest : public ::testing::Test {
 protected:
     BinaryTree<int> tree;
@@ -269,7 +271,7 @@ TEST_F(BinaryTreeTest, DeepTreeHeightRecalculation) {
 
     tree.remove(25);
     EXPECT_EQ(tree.getRoot()->getHeight(), 4);
-    
+
     tree.remove(10);
     tree.remove(30);
     EXPECT_EQ(tree.getRoot()->getHeight(), 3);

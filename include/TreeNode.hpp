@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <memory>
 
+namespace adsc {
+
 template <typename T>
 class TreeNode {
 public:
@@ -70,3 +72,5 @@ int32_t TreeNode<T>::getNodeBalance() const {
     int32_t rightH = m_right ? m_right->getHeight() : 0;
     return leftH - rightH;
 }
+
+} // namespace adsc

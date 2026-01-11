@@ -2,6 +2,8 @@
 
 #include "BinaryTree.hpp"
 
+namespace adsc {
+
 template <typename T, typename Comparator = std::less<T>>
 class AVLTree : public BinaryTree<T, Comparator> {
 public:
@@ -251,3 +253,5 @@ void AVLTree<T, Comparator>::rotateRight(TreeNodePtr& node) {
     
     node = std::move(pivot);
 }
+
+} // namespace adsc
